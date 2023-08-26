@@ -1,0 +1,2406 @@
+Scala Final Learning :-
+-------------------------
+
+Scala is very much object oriented programming language.
+Every value in scala is an object.
+We call methods of objects using dot notation.
+There are no operators in scala hence +, -, /, * are methods.
+
+scala> println("Hello World") //Hello World in scala
+Hello World
+
+scala> 9.765.toInt //Converting Double data type to Int data type. We need to use toInt method for it
+res1: Int = 9
+
+scala> 9.toDouble //Converting Int data type to Double data type. We need to use toDouble method for it
+res2: Double = 9.0
+
+scala> 98.+(108) //Calling the method + on Int object 98 by passing another Int object 108
+res3: Int = 206
+
+If a method has only one parameter then we can call the method without using dot and parentheses.
+
+scala> 98 + 108
+res4: Int = 206
+
+Basic data types in Scala :-
+-------------------------------
+
+Boolean, Char, String, Int, Double are basic data types in Scala.
+Boolean data type has only two values :- true and false
+Char data type can be used to represent individual characters.
+Chars are stored internally as integers.
+Char literals are represented using single quotes.
+String data type is used to represent collection of characters.
+String literals are represented using double quotes.
+Strings can be concatenated using +
+When we apply * on strings it works as a repetetion operator.
+
+scala> 'a'.toInt //Converting Char to Int which prints the equivalent ASCII value of the Char literal we passed
+res5: Int = 97
+
+scala> 'd'.toInt
+res6: Int = 100
+
+scala> 'a' + 4 //Since Chars are stored internally as integers we can perform arithmetic operations on them like this
+res7: Int = 101
+
+scala> 97.toChar //Converting Int to Char. We need to use toChar method
+res8: Char = a
+
+scala> 946.toBinaryString //Convert Int to Binary String
+res9: String = 1110110010
+
+scala> 9843.toHexString //Converting Int to Hexadecimal String
+res10: String = 2673
+
+scala> 9087.toOctalString //Converting Int to Octal String
+res11: String = 21577
+
+scala> "Hello " + "World!" //String Concatenation
+res12: String = Hello World!
+
+scala> "Hello " * 4 //String repetetion operator
+res13: String = "Hello Hello Hello Hello "
+
+Tuple :-
+--------
+
+Tuple is a combination of other data types.
+We create tuples by placing the value in parentheses.
+Tuple index starts with 1 and we access the elements using _<index> notation.
+
+scala> val tuple1 = ("John",true,45.17,908)
+tuple1: (String, Boolean, Double, Int) = (John,true,45.17,908)
+
+scala> tuple1._1 //Accessing the first element of the tuple
+res0: String = John
+
+scala> tuple1._3 //Accessing the third element of the tuple
+res1: Double = 45.17
+
+scala> val tuple2 = "John" -> 6.78 //Creating a two valued tuple in a different way
+tuple2: (String, Double) = (John,6.78)
+
+scala> tuple2._1
+res2: String = John
+
+The above syntax will create only two valued tuple.
+
+scala> val tuple3 = "John" -> 78 -> 9.456 -> false //Creating a complicated two valued tuple
+tuple3: (((String, Int), Double), Boolean) = (((John,78),9.456),false)
+
+scala> tuple3._1
+res3: ((String, Int), Double) = ((John,78),9.456)
+
+scala> tuple3._1._1
+res4: (String, Int) = (John,78)
+
+scala> tuple3._1._1._2 //Accessing the nested element of a complicated two valued tuple
+res5: Int = 78
+
+Details of Int data type :-
+----------------------------
+
+scala> Int.MaxValue //Maximum value an Int data type can hold
+res7: Int = 2147483647
+
+scala> Int.MinValue //Minimum value an Int data type can hold
+res9: Int = -2147483648
+
+The result of the below expression is negative.
+Since Int is the default data type for numbers once the result exceeds the maximum value an Int can hold it goes back in circle to the minimum value
+
+scala> 2000000000 + 2000000000
+res10: Int = -294967296
+
+Other Integer types :- Short, Byte, Long, Char
+
+scala> Byte.MaxValue
+res11: Byte = 127
+
+scala> Byte.MinValue
+res13: Byte = -128
+
+scala> Short.MaxValue
+res15: Short = 32767
+
+scala> Short.MinValue
+res17: Short = -32768
+
+scala> Long.MinValue
+res19: Long = -9223372036854775808
+
+scala> Long.MaxValue
+res21: Long = 9223372036854775807
+
+scala> Char.MinValue.toInt
+res22: Int = 0
+
+scala> Char.MaxValue.toInt
+res24: Int = 65535
+
+We can convert a literal to Long by adding L at the end.
+The result of the below expression will be correct since Long is 64 bit and can hold large values.
+
+scala> 2000000000L + 2000000000L
+res26: Long = 4000000000
+
+The below expression won't yield the output as 0 since doubles are represeneted differently inside computer.
+Never compare two double values to determine the result. We might not get expected results.
+
+scala> 1.0 - 0.9 - 0.1
+res27: Double = -2.7755575615628914E-17
+
+scala> 9.80
+res28: Double = 9.8
+
+scala> 9.80f //We can convert a literal to float by adding f at the end
+res29: Float = 9.8
+
+Math package useful functions :-
+------------------------------------
+
+scala> Math.PI
+res30: Double = 3.141592653589793
+
+scala> Math.E
+res31: Double = 2.718281828459045
+
+scala> Math.sqrt(10)
+res32: Double = 3.1622776601683795
+
+scala> Math.random
+res33: Double = 0.34042812660056065
+
+scala> Math.abs(1 - 3) //To convert a negative value returned by our expression to positive value
+res1: Int = 2
+
+scala> Math.abs(3 - 1)
+res2: Int = 2
+
+Variables in Scala :-
+----------------------
+
+Variable names should not start with a digit.
+As a rule of thumb always try to use vals in your code use var if you can't figure out the solution using val.
+All the data types we discussed so far are immutable meaning they can't be changed once created.
+We can mutate the var but can't make them point to a different object.
+
+scala> val a = "Dharani"
+a: String = Dharani
+
+scala> a = "Ram"
+         ^
+       error: reassignment to val
+
+scala> var b = "John"
+b: String = John
+
+scala> b = "World"
+mutated b
+
+scala> println(b)
+World
+
+scala> b = 10 //We can't point variable b to a different type of object we can only point to a String object
+           ^
+       error: type mismatch;
+        found   : Int(10)
+        required: String
+
+scala> b = "Hello"
+mutated b
+
+String interpolation is easy peasy no need to write it.
+
+String Methods :-
+-------------------
+
+scala> val name = "Dharani Kumar Gopavaram"
+name: String = Dharani Kumar Gopavaram
+
+scala> name.length //length method returns the number of characters in the String
+res35: Int = 23
+
+String index starts with 0 and we can access the elements by placing the index in parentheses.
+
+scala> name(0) //Accessing the first element of the String
+res36: Char = D
+
+scala> name(2) //Accessing the third element of the String
+res37: Char = a
+
+If we try to access index which doesn't exist we get StringIndexOutOfBoundsException
+
+scala> name(30)
+java.lang.StringIndexOutOfBoundsException: String index out of range: 30
+  at java.base/java.lang.StringLatin1.charAt(StringLatin1.java:47)
+  at java.base/java.lang.String.charAt(String.java:693)
+  at scala.collection.StringOps$.apply$extension(StringOps.scala:171)
+  ... 28 elided
+
+indexOf method :- returns the index of the string we passed
+If the specified string doesn't exist we get -1 as the result
+indexOf method is overloaded. There are two versions of it
+indexOf("String")
+indexOf("String",index) -- In this version it will start searching for the String from the index we specify
+There is a method called lastIndexOf which will search for the string we specify from end to start
+
+scala> name.indexOf("n")
+res39: Int = 5
+
+scala> name.indexOf("x")
+res40: Int = -1
+
+scala> name.indexOf("n",6) //Since the character n doesn't exist in the String after index 5 we get -1 as the result
+res41: Int = -1
+
+scala> name.lastIndexOf("a")
+res42: Int = 21
+
+scala> name.lastIndexOf("a",15)
+res43: Int = 11
+
+Substring method is used to extract portions of the original string
+This method is overloaded and has two versions of it
+substring(index) -- returns all the characters starting from index
+substring(fromIndex,toIndex) -- returns all the characters starting from fromIndex to toIndex(not inclusive)
+
+scala> name.substring(8)
+res44: String = Kumar Gopavaram
+
+scala> name.substring(8,13)
+res46: String = Kumar
+
+trim method can be used to remove spaces from both sides of the string.
+splitAt method splits the string at the specified position and returns a tuple.
+
+scala> name
+res49: String = Dharani Kumar Gopavaram
+
+scala> val lastSpaceIndex = name.lastIndexOf(" ")
+lastSpaceIndex: Int = 13
+
+scala> val (first,last) = name.splitAt(lastSpaceIndex)
+first: String = Dharani Kumar
+last: String = " Gopavaram"
+
+scala> s"${last.trim},$first"
+res50: String = Gopavaram,Dharani Kumar
+
+scala> name.toUpperCase //Converting String to upper case
+res52: String = DHARANI KUMAR GOPAVARAM
+
+scala> name.toLowerCase //Converting String to lower case
+res54: String = dharani kumar gopavaram
+
+The methods we apply on Strings doesn't alter the original string because strings are immutable.
+Instead it creates a new String object with the required changes
+
+Given the hours, minutes and seconds separated by colon. Convert the total time to seconds.
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn.readLine
+
+print("Please enter time separated by colon between hours, minutes and seconds :- ")
+val time = readLine
+val firstColonIndex = time.indexOf(":")
+val lastColonIndex = time.lastIndexOf(":")
+val hours = time.substring(0,firstColonIndex).toInt
+val minutes = time.substring(firstColonIndex + 1,lastColonIndex).toInt
+val seconds = time.substring(lastColonIndex + 1).toInt
+val totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds
+println(s"The total time in seconds :- $totalTimeInSeconds")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Please enter time separated by colon between hours, minutes and seconds :- 24:00:00
+The total time in seconds :- 86400
+
+There is a type Unit in scala which is similar to type void in Java/C++ and it has only one value associated with it which is ().
+Many void returning methods in Java are mapped to Unit returning methods in Scala.
+The assignments in Scala give the Unit return type.
+
+scala> val unitType : Unit = {
+     |   println("This code block returns unit type")
+     |   val a = 10
+     | }
+This code block returns unit type
+unitType: Unit = ()
+
+The comparison operators in scala are ==, !=, < , >, <= , >=, eq(which checks the identity of the two variables but rarely used we use == more)
+The Boolean operators are &&, || (inclusive OR), ^ (exclusive OR), !(not)
+
+&& (If any of the expression returns false the output is false otherwise the output is true)
+|| (If any of the expression returns true the output is true otherwise the output is false. If both the conditions are true the output is true)
+^  (If any of the expression returns true the output is true otherwise the output is false. If both the conditions are true the output is false)
+
+&& and || are short circuited meaning if the first expression determines the result the second expression is not evaluated.
+
+scala> val name = "Dharani Kumar Gopavaram"
+name: String = Dharani Kumar Gopavaram
+
+map function will apply the anonymous function we pass to all the elements of the string.
+
+scala> name.map(c => c + 1) //Since chars are treated internally as integers we see Integer outputs here
+res1: IndexedSeq[Int] = ArraySeq(69, 105, 98, 115, 98, 111, 106, 33, 76, 118, 110, 98, 115, 33, 72, 112, 113, 98, 119, 98, 115, 98, 110)
+
+scala> name.map(c => (c + 1).toChar) //This will give us the correct output
+res2: String = Eibsboj!Lvnbs!Hpqbwbsbn
+
+scala> name.count(c => "aeiou".contains(c)) //to count the number of vowels present in the string
+res3: Int = 9
+
+scala> name.split(" ") //split method splits the string based on the separator we give and returns an Array
+res4: Array[String] = Array(Dharani, Kumar, Gopavaram)
+
+scala> "Dharani  Kumar Gopavaram".split(" ") //If there are multiple spaces it will treat extra space as separator string to overcome this we need to use regular expression
+res5: Array[String] = Array(Dharani, "", Kumar, Gopavaram)
+
+scala> "Dharani  Kumar Gopavaram".split(" +") //In this expression + means one or more
+res6: Array[String] = Array(Dharani, Kumar, Gopavaram)
+
+scala> "1 2 3 4 5 6".split(" ").map(x => x.toInt).sum
+res7: Int = 21
+
+Functions :-
+-------------
+
+Function definition starts with def Every argument to a function should have a type associated with it.
+The return type of the function is optional scala can figure out on its own but it is a good practice to specify the return type.
+
+scala> def square(x : Int) : Int = x * x //Defining a function that acceps one argument
+square: (x: Int)Int
+
+scala> square(10) //Calling the square function by passing argument 10
+res8: Int = 100
+
+scala> square(45)
+res9: Int = 2025
+
+scala> def someLogic(x : Int,y : Int) = 4 * x - 2 * y //Defining a function that accepts two arguments
+someLogic: (x: Int, y: Int)Int
+
+scala> someLogic(10,20)
+res10: Int = 0
+
+scala> someLogic(20,20)
+res11: Int = 40
+
+Side effects in Scala are those which change the value of a variable or print the output to a console or read input from the user inside a function.
+A function whose return type is Unit is called procedure in scala.
+
+scala> def greet(name : String) : Unit = println(s"Hello $name") //Defining a function which returns Unit
+greet: (name: String)Unit
+
+scala> greet("Dharani")
+Hello Dharani
+
+A function literal is alternate syntax for defining a function.
+It's useful when you want to pass function as an argument to a method(especially a higher order method like fold of filter) but we don't want to define a separate function.
+Function literals are anonymous they don't have a name by default but we can give them a name by binding them to a variable.
+
+scala> (x : Int, y : Int) => x + y //defining an anonymous function
+res13: (Int, Int) => Int = $$Lambda$964/0x0000000800650040@5765cd21
+
+scala> val lambdaSumFn = (x : Int, y : Int) => x + y //giving a name for the anonymous function by binding it to a variable
+lambdaSumFn: (Int, Int) => Int = $$Lambda$965/0x0000000800651040@6eec092
+
+scala> lambdaSumFn(10,20)
+res14: Int = 30
+
+When the parameter we pass to the lambda function is used only once inside the function body then we can use underscore notation like this
+
+scala> val lambdaSumFn2 = (_:Int) + (_:Int)
+lambdaSumFn2: (Int, Int) => Int = $$Lambda$967/0x0000000800652840@3d8c499a
+
+scala> lambdaSumFn2(100,200)
+res15: Int = 300
+
+Other way of using underscore notation.
+
+scala> val lambdaSquareFn3 : (Int,Int) => Int = _ + _
+lambdaSquareFn3: (Int, Int) => Int = $$Lambda$969/0x0000000800654040@6eefc125
+
+scala> lambdaSquareFn3(1000,2000)
+res16: Int = 3000
+
+Higher order functions are functions that can take functions as arguments and return functions.
+Let's say we have 3 functions to perform sum, multiplication and min on 3 Integers.
+We will write the functions like this.
+
+scala> def sum3(x : Int, y : Int, z : Int) = x + y + z
+sum3: (x: Int, y: Int, z: Int)Int
+
+scala> def mult3(x : Int, y : Int, z : Int) = x * y * z
+mult3: (x: Int, y: Int, z: Int)Int
+
+scala> def min3(x : Int, y : Int, z : Int) = x min y min z
+min3: (x: Int, y: Int, z: Int)Int
+
+scala> sum3(10,20,30)
+res17: Int = 60
+
+scala> mult3(8,4,2)
+res18: Int = 64
+
+scala> min3(8,1,2)
+res19: Int = 1
+
+Instead of writing 3 functions what if we write a function that takes a lambda function as an argument and perform all the operations in the function itself.
+
+scala> def combine3(x : Int, y : Int, z : Int, f : (Int,Int) => Int) : Int = f(f(x,y),z)
+combine3: (x: Int, y: Int, z: Int, f: (Int, Int) => Int)Int
+
+scala> combine3(8,1,2,(x,y) => x + y)
+res21: Int = 11
+
+scala> combine3(8,1,2,(x,y) => x * y)
+res22: Int = 16
+
+scala> combine3(8,1,2,_ min _) //We can use underscore notation as well
+res23: Int = 1
+
+scala> combine3(8,1,2,_ max _)
+res24: Int = 8
+
+Consider the below function.
+
+scala> def addVector(v1 : (Int,Int,Int), v2 : (Int,Int,Int)) : (Int,Int,Int) = (v1._1 + v2._1, v1._2 + v2._2, v1._3 + v2._3)
+addVector: (v1: (Int, Int, Int), v2: (Int, Int, Int))(Int, Int, Int)
+
+scala> addVector((10,20,30),(40,50,60))
+res26: (Int, Int, Int) = (50,70,90)
+
+This type of functions are hard to read because of long list of tuples.
+To overcome this issue we can define a type and use it.
+
+scala> type Vect3 = (Int,Int,Int)
+defined type alias Vect3
+
+scala> def optimisedVector(v1 : Vect3, v2 : Vect3) : Vect3 = (v1._1 + v2._1, v1._2 + v2._2, v1._3 + v2._3)
+optimisedVector: (v1: Vect3, v2: Vect3)Vect3
+
+scala> optimisedVector((100,200,300),(400,500,600))
+res27: Vect3 = (500,700,900)
+
+The arguments of a function can accept any number of values such types of arguments are called variable length arguments.
+If we define a function with variable length arguments we can call the function with any number of values we want.
+
+scala> def average(nums : Int*) = nums.sum / nums.length.toDouble //Defining a function which will accept variable length arguments
+average: (nums: Int*)Double
+
+scala> average() //This returns NaN which means Not a Number. To overcome this we can alter our function a bit
+res28: Double = NaN
+
+scala> average(10) //Once we define functions like this we can pass any number of arguments we want
+res29: Double = 10.0
+
+scala> average(10,20)
+res30: Double = 15.0
+
+scala> average(10,20,30,40,50)
+res31: Double = 30.0
+
+scala> def goodAverage(nums : Int*) = if(nums.nonEmpty) nums.sum / nums.length.toDouble else 0.0 //We will perform the operation if there are some values passed to the function argument
+goodAverage: (nums: Int*)Double
+
+scala> goodAverage() //This returns the correct output
+res32: Double = 0.0
+
+scala> goodAverage(10,20,30,40)
+res33: Double = 25.0
+
+scala> goodAverage(10,20,30,40,50,60,70)
+res34: Double = 40.0
+
+Writing the above function using collection instead of variable length arguments.
+The code will be a bit verbose if we use collections.
+
+scala> def averageList(lst : List[Int]) = if(lst.nonEmpty) lst.sum / lst.length.toDouble else 0.0
+averageList: (lst: List[Int])Double
+
+scala> val numsList = List(10,20,30,40,50,60)
+numsList: List[Int] = List(10, 20, 30, 40, 50, 60)
+
+scala> averageList(numsList)
+res35: Double = 35.0
+
+Passing the list of values to a variable length argument function.
+Let's say if we want to pass numsList to goodAverage function we need to use below syntax for it.
+
+scala> goodAverage(numsList:_*)
+res37: Double = 35.0
+
+Recursion :-
+--------------
+
+A function calling itself is called recursive function.
+Every recursive function should have a base case which tells when to stop calling the function.
+We must specify the return type for a recursive function.
+There are two types of recursion :- normal recursion and tail recursion.
+
+In normal recursion, a function calls itself and does not return any value until the base case is reached, which is the stopping condition for the recursion.
+Each recursive call creates a new stack frame on the call stack, which can lead to a stack overflow if the recursion depth is too large.
+
+In contrast, tail recursion is a type of recursion where the recursive call is the last operation performed in the function, and the result of the recursive call is immediately returned.
+This means that there is no need to create a new stack frame for the recursive call since the current stack frame can be reused.
+This makes tail recursion more efficient and avoids the risk of stack overflow.
+
+scala> def factReturnInt(n : Int) : Int = if(n < 2) 1 else n * factReturnInt(n - 1)
+factReturnInt: (n: Int)Int
+
+scala> factReturnInt(5)
+res41: Int = 120
+
+scala> factReturnInt(34) //The result is 0 since Int is 32 bit and cannot hold large values
+res42: Int = 0
+
+scala> def factReturnLong(n : Int) : Long = if(n < 2) 1L else n * factReturnLong(n - 1)
+factReturnLong: (n: Int)Long
+
+scala> factReturnLong(34) //When we change the return type of the function to Long we get correct result
+res43: Long = 4926277576697053184
+
+scala> factReturnLong(56)
+res44: Long = 6908521828386340864
+
+scala> factReturnLong(90) //Even Long data type is not sufficient all the times
+res45: Long = 0
+
+scala> def factReturnBigInt(n : Int) : BigInt = if(n < 1) 1 else n * factReturnBigInt(n - 1)
+factReturnBigInt: (n: Int)BigInt
+
+scala> factReturnBigInt(90) //To get the correct result we need to change the return type of the function to BigInt
+res46: BigInt = 1485715964481761497309522733620825737885569961284688766942216863704985393094065876545992131370884059645617234469978112000000000000000000000
+
+Writing the factorial function using tail recursion.
+@tailrec we used below is an scala annotation
+Scala annotations are a way to add metadata to classes, methods, and other program elements in Scala code.
+Annotations provide additional information that can be used by compilers, run-time systems, and other tools to customize the behavior of a program or generate additional code.
+
+Program :-
+------------
+bash-3.2$ cat practice.scala
+import scala.annotation.tailrec
+
+@tailrec
+def factTailRecursion(n : Int, value : Int) : Int = {
+  if(n < 2) value
+  else factTailRecursion(n - 1,value * n )
+}
+
+println(s"factTailRecursion(3,1) :- ${factTailRecursion(3,1)}")
+println(s"factTailRecursion(7,1) :- ${factTailRecursion(7,1)}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+factTailRecursion(3,1) :- 6
+factTailRecursion(7,1) :- 5040
+
+More Recursion Examples :-
+-------------------------------
+
+Example 1 :-
+--------------
+scala> def squareSumNumbers(n : Int) : Int = if(n < 1) 0 else n * n + squareSumNumbers(n - 1)
+squareSumNumbers: (n: Int)Int
+
+scala> squareSumNumbers(3)
+res0: Int = 14
+
+scala> squareSumNumbers(6)
+res1: Int = 91
+
+scala> squareSumNumbers(10)
+res2: Int = 385
+
+Example 2 :-
+--------------
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.annotation.tailrec
+
+@tailrec
+def countDown(n : Int) : Unit = {
+  if(n > 1) {
+   println(n)
+   countDown(n - 1)
+  }
+}
+
+println("Calling the countDown function")
+countDown(10)
+
+@tailrec
+def printFromTo(from : Int,to : Int) : Unit = {
+  if(from <= to) {
+    println(from)
+    printFromTo(from + 1,to)
+  }
+}
+
+println("Calling the printFromTo function")
+printFromTo(17,35)
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Calling the countDown function
+10
+9
+8
+7
+6
+5
+4
+3
+2
+Calling the printFromTo function
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+
+Recursion with user input :-
+-------------------------------
+
+Sum Finite Integers
+----------------------
+
+Program :-
+-------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumFiniteIntegers(n : Int) : Int = {
+  if(n < 1) 0
+  else {
+    print("Enter the integer :- ")
+    val input = readInt
+    input + sumFiniteIntegers(n - 1)
+  }
+}
+
+print("How many integers you want to sum :- ")
+val n = readInt
+println(s"The sum of the entered integers is :- ${sumFiniteIntegers(n)}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+How many integers you want to sum :- 5
+Enter the integer :- 100
+Enter the integer :- 200
+Enter the integer :- 300
+Enter the integer :- 400
+Enter the integer :- 500
+The sum of the entered integers is :- 1500
+
+SumUntilNegative :-
+----------------------
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumUntilNegative() : Int = {
+  print("Enter an integer :- ")
+  val input = readInt
+  if(input < 0 ) 0
+  else input + sumUntilNegative()
+}
+
+println(s"The sum of the entered numbers is :- ${sumUntilNegative()}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter an integer :- 100
+Enter an integer :- 200
+Enter an integer :- 300
+Enter an integer :- 400
+Enter an integer :- 500
+Enter an integer :- 600
+Enter an integer :- 700
+Enter an integer :- -1
+The sum of the entered numbers is :- 2800
+
+SumUntilQuit :-
+-----------------
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumUntilQuit() : Int = {
+  print("Enter an integer to sum or type quit to terminate :- ")
+  val input = readLine.trim.toLowerCase
+  if(input == "quit") 0
+  else input.toInt + sumUntilQuit()
+}
+
+println(s"The sum of the entered integers is :- ${sumUntilQuit()}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter an integer to sum or type quit to terminate :- 100
+Enter an integer to sum or type quit to terminate :- 200
+Enter an integer to sum or type quit to terminate :- 300
+Enter an integer to sum or type quit to terminate :- quit
+The sum of the entered integers is :- 600
+
+We can make the above program to terminate if there is any alphabet character entered instead of quit using regular expression.
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumUntilQuit() : Int = {
+  print("Enter an integer to sum or type quit to terminate :- ")
+  val input = readLine.trim.toLowerCase
+  if(input.matches(".*[a-zA-Z].*")) 0
+  else input.toInt + sumUntilQuit()
+}
+
+println(s"The sum of the entered integers is :- ${sumUntilQuit()}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter an integer to sum or type quit to terminate :- 1a
+The sum of the entered integers is :- 0
+
+bash-3.2$ scala practice.scala
+Enter an integer to sum or type quit to terminate :- 100
+Enter an integer to sum or type quit to terminate :- 200
+Enter an integer to sum or type quit to terminate :- paosj12jas
+The sum of the entered integers is :- 300
+
+SumAndCount :-
+------------------
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumAndCount() : (Int,Int) = {
+  print("Enter the integer :- ")
+  val input = readLine
+  if(input.matches(".*[a-zA-Z].*")) (0,0)
+  else {
+    val (sum,count) = sumAndCount()
+    (input.toInt + sum,count + 1)
+  }
+}
+
+println(s"The sum and the count of integers entered is :- ${sumAndCount()}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter the integer :- 100
+Enter the integer :- 200
+Enter the integer :- 300
+Enter the integer :- 400
+Enter the integer :- quit
+The sum and the count of integers entered is :- (1000,4)
+
+Writing the same program using tail recursion which is easier and much simpler to understand
+
+Program :-
+-----------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def sumAndCountTailRecursion(sum : Int, count : Int) : (Int,Int) = {
+  print("Enter an integer :- ")
+  val input = readLine.trim.toLowerCase
+  input.matches(".*[a-zA-Z].*") match {
+    case true => (sum,count)
+    case false => sumAndCountTailRecursion(sum + input.toInt,count + 1)
+  }
+}
+
+println(s"The sum and the count of integers entered is :- ${sumAndCountTailRecursion(0,0)}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter an integer :- 100
+Enter an integer :- 200
+Enter an integer :- 300
+Enter an integer :- 400
+Enter an integer :- pajsjd
+The sum and the count of integers entered is :- (1000,4)
+
+MultiplicationAndCount :-
+----------------------------
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def multAndCont(result : Int,count : Int) : (Int,Int) = {
+  print("Enter an integer :- ")
+  val input = readLine.trim.toLowerCase
+  if(input.matches(".*[a-zA-Z].*")) (result,count)
+  else multAndCont(result * input.toInt,count + 1)
+}
+
+println(s"The product of the numbers you entered is :- ${multAndCont(1,0)}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Enter an integer :- 10
+Enter an integer :- 20
+Enter an integer :- 30
+Enter an integer :- qia
+The product of the numbers you entered is :- (6000,3)
+
+Abstracting SumAndCount and MultiplicationAndCount functions :-
+
+Program :-
+------------
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def resultAndCount(result : Int,count : Int,f : (Int,Int) => Int) : (Int,Int) = {
+  print("Enter an integer :- ")
+  val input = readLine.trim.toLowerCase
+  if(input.matches(".*[a-zA-Z].*")) (result,count)
+  else resultAndCount(f(input.toInt,result),count+1,f)
+}
+
+println("Calling the resultAndCount function for addition")
+println(s"Calling resultAndCount for addition :- ${resultAndCount(0,0,(x,y) => x + y)}")
+
+println("Calling the resultAndCount function for product")
+println(s"Calling resultAndCount for product :- ${resultAndCount(1,0,_ * _)}")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Calling the resultAndCount function for addition
+Enter an integer :- 100
+Enter an integer :- 200
+Enter an integer :- 300
+Enter an integer :- 400
+Enter an integer :- quit
+Calling resultAndCount for addition :- (1000,4)
+Calling the resultAndCount function for product
+Enter an integer :- 10
+Enter an integer :- 20
+Enter an integer :- 30
+Enter an integer :- 40
+Enter an integer :- 50
+Enter an integer :- quit
+Calling resultAndCount for product :- (12000000,5)
+
+Try to use tail recursion more in the code. It is easy to write and easy to understand as well.
+
+Match Expression :-
+----------------------
+
+The syntax of the match expression is
+
+expression match {
+    case pattern1 =>
+    case pattern2 =>
+}
+
+Writing the factorial using match expression.
+
+scala> def factMatchExpression(n : Int) : Int = n match {
+     |   case 2 => 2
+     |   case _ => n * factMatchExpression(n-1)
+     | }
+factMatchExpression: (n: Int)Int
+
+scala> factMatchExpression(3)
+res0: Int = 6
+
+scala> factMatchExpression(7)
+res1: Int = 5040
+
+If we pass negative value to the factMatchExpression function we get StackOverflowError.
+
+scala> factMatchExpression(-7)
+java.lang.StackOverflowError
+
+We can avoid this situation using if guards.
+
+scala> def factMatchIfGuard(n : Int) : Int = n match {
+     |   case 2 => 2
+     |   case x if x > 0 => n * factMatchIfGuard(n - 1)
+     |   case _ => -1
+     | }
+factMatchIfGuard: (n: Int)Int
+
+scala> factMatchIfGuard(4)
+res3: Int = 24
+
+scala> factMatchIfGuard(-4)
+res4: Int = -1
+
+Recursive Fizz Buzz :-
+------------------------
+
+If the number is divided by 3 we will say fizz, else if the number is divided by 5 we will say buzz if the number is divided by both 3 and 5 we will say fizz buzz.
+
+Progam :-
+-----------
+
+bash-3.2$ cat practice.scala
+def recursiveFizzBuzz(n : Int) : Unit = {
+  if(n < 30) {
+    (n % 3, n % 5) match {
+      case (0,0) => println("Fizz Buzz")
+      case (0,_) => println("Fizz")
+      case (_,0) => println("Buzz")
+      case (_,_) => println(n)
+    }
+    recursiveFizzBuzz(n + 1)
+  }
+}
+
+recursiveFizzBuzz(0)
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Fizz Buzz
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+Fizz Buzz
+16
+17
+Fizz
+19
+Buzz
+Fizz
+22
+23
+Fizz
+Buzz
+26
+Fizz
+28
+29
+
+try/catch :-
+------------
+
+If we pass string value to readInt function it results in NumberFormatException.
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+print("Please enter an integer :- ")
+val i = readInt
+println(s"The value of i is :- $i")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Please enter an integer :- 10
+The value of i is :- 10
+
+bash-3.2$ scala practice.scala
+Please enter an integer :- abc
+java.lang.NumberFormatException: For input string: "abc"
+
+We can avoid the above situation using try/catch block.
+
+Program :-
+-----------
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+val i : Int = try {
+  print("Please enter an integer :- ")
+  readInt
+} catch {
+  case e : NumberFormatException => {
+    println("You didn't enter an integer hence assigning -1 to the variable i")
+    -1
+  }
+}
+
+println(s"The value of i is :- $i")
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Please enter an integer :- 10
+The value of i is :- 10
+
+bash-3.2$ scala practice.scala
+Please enter an integer :- abc
+You didn't enter an integer hence assigning -1 to the variable i
+The value of i is :- -1
+
+Recursion wit try/catch :-
+
+Program :-
+------------
+
+bash-3.2$ cat practice.scala
+import scala.io.StdIn._
+
+def safeRead() : Unit = {
+  try {
+   print("Please enter an integer :- ")
+   val i = readInt
+   println(s"You entered an integer and the value of it is :- $i")
+  } catch {
+    case e : NumberFormatException =>
+      println("You didn't enter an integer please try again")
+      safeRead()
+  }
+}
+
+safeRead()
+
+Output :-
+----------
+
+bash-3.2$ scala practice.scala
+Please enter an integer :- abc
+You didn't enter an integer please try again
+Please enter an integer :- 123d
+You didn't enter an integer please try again
+Please enter an integer :- 123
+You entered an integer and the value of it is :- 123
+
+Option Type in Scala :-
+--------------------------
+
+The option type in scala represents some thing that may or may not have a value.
+There will be some methods for collection types which returns Option type so we need to understand this.
+One example of such function is find which takes a boolean function as parameter and returns the first element that satisfies the condition.
+
+scala> val sampleList = List(7,5,1,2,3,4,9)
+sampleList: List[Int] = List(7, 5, 1, 2, 3, 4, 9)
+
+scala> sampleList.find(x => x > 7)
+res3: Option[Int] = Some(9)
+
+scala> sampleList.find(x => x > 7).get //If there is any element that satisfies the condition we specified in the find method get method returns that value
+res4: Int = 9
+
+scala> sampleList.find(x => x > 9).get
+java.util.NoSuchElementException: None.get
+  at scala.None$.get(Option.scala:632)
+  at scala.None$.get(Option.scala:631)
+  ... 28 elided
+
+scala> try {
+     |   print(sampleList.find(x => x > 9).get) //If there is no element that satisfies the condition we specify and if we try to use get method we get NoSuchElementException
+     | } catch {
+     |   case e : NoSuchElementException =>
+     |      println("Exception occurred since you are trying to access an element that doesn't exist")
+     | }
+Exception occurred since you are trying to access an element that doesn't exist
+
+Instead of get method we can use getOrElse method which won't give NoSuchElementException.
+
+scala> sampleList.find(_ > 9).getOrElse(-1) //Just remember the return type is Int here
+res8: Int = -1
+
+scala> sampleList.find(_ > 9).getOrElse("Data not found") //Observe the return type which is Any here
+res9: Any = Data not found
+
+scala> sampleList.find(_ > 7).getOrElse(-1)
+res10: Int = 9
+
+We can use map function on Option type like this.
+
+scala> sampleList.find( _ > 7).map(_ * 2) //We get the correct value
+res11: Option[Int] = Some(18)
+
+scala> sampleList.find( _ > 9).map(_ * 2) //map function doesn't return any error if the element doesn't exist
+res12: Option[Int] = None
+
+Using match expresion on Option type.
+
+scala> sampleList.find(_ > 7) match {
+     |   case Some(n) => println(n)
+     |   case None => println(0)
+     | }
+9
+
+scala> sampleList.find(_ > 9) match {
+     |   case Some(n) => println(n)
+     |   case None => println(0)
+     | }
+0
+
+Using if expression on the Option type.
+
+scala> val result = sampleList.find(_ > 9)
+result: Option[Int] = None
+
+scala> if(result.nonEmpty) result.get * 2 else 0
+res16: Int = 0
+
+Try to use getOrElse or match expression on the Option type which are very easy and good.
+
+Parametric Functions :-
+--------------------------
+
+We can write functions in Scala that can have types as arguments.
+
+scala> def ident[A](i : A) : A = i //Defining a parametric functions
+ident: [A](i: A)A
+
+scala> ident(10) //Calling the ident function for Int
+res17: Int = 10
+
+scala> ident("Dharani") //Calling the ident function for String data type
+res18: String = Dharani
+
+scala> ident(40.7) //Calling the ident function for Double data type
+res19: Double = 40.7
+
+In the above 3 statements same ident function is called for Int, String and Double data types.
+That is the power of the parametric functions.
+
+scala> def makeTuple[A,B](a : A, b : B) = (a,b) //another parametric function with two arguments
+makeTuple: [A, B](a: A, b: B)(A, B)
+
+scala> makeTuple(10,20)
+res20: (Int, Int) = (10,20)
+
+scala> makeTuple("Hello",45.87)
+res21: (String, Double) = (Hello,45.87)
+
+Let's consider the below parametric function.
+
+scala> def threeList[A](a1 : A, a2 : A, a3 : A) : List[A] = List(a1,a2,a3)
+threeList: [A](a1: A, a2: A, a3: A)List[A]
+
+scala> threeList(10,20,30)
+res22: List[Int] = List(10, 20, 30)
+
+scala> threeList(10,20,"Hello") //We get the return type as Any this is because of sub-typing in scala.
+res23: List[Any] = List(10, 20, Hello)
+
+subtyping in scala :-
+----------------------
+
+Int, Double, Unit, Char, Boolean belong to a type called AnyVal.
+Strings, List, Arrays belong to a type called AnyRef
+AnyVal and AnyRef are types of Any which is the ultimate parent super type.
+
+Since we are passing Int and String which are subtypes of AnyVal and AnyRef scala gives Any as the type which holds both Int and String
+One more example of parametric functions.
+
+scala> val sampleList = List(9,5,1,4,3,2,8)
+sampleList: List[Int] = List(9, 5, 1, 4, 3, 2, 8)
+
+scala> def operateOnLists[A,B](lst : List[A],v : B,f : (A,B) => B) : B = lst match {
+     |   case Nil => v
+     |   case h :: t => operateOnLists(t,f(h,v),f) //Important pattern matching we can use for lists please remember it
+     | }
+operateOnLists: [A, B](lst: List[A], v: B, f: (A, B) => B)B
+
+scala> operateOnLists(sampleList,0,(x : Int, y : Int) => x + y)
+res0: Int = 32
+
+scala> operateOnLists(sampleList,1,(x : Int, y : Int) => x * y)
+res1: Int = 8640
+
+scala> operateOnLists(sampleList,"Dharani",(x : Int, y : String) => x.toString + y)
+res2: String = 8234159Dharani
+
+scala> operateOnLists(sampleList,0,(x,y) => x + y)
+                                    ^
+       error: missing parameter type
+                                      ^
+       error: missing parameter type
+
+In the above statement we need to specify the types for the parameter f while calling the function this is because scala can't figure out the type dynamically.
+To overcome this problem we can define the function using currying.
+
+Writing the above function using currying.
+
+scala> def operateOnListsCurrying[A,B](lst :List[A],v : B)(f : (A,B) => B) : B = lst match {
+     |   case Nil => v
+     |   case h :: t => operateOnListsCurrying(t,f(h,v))(f)
+     | }
+operateOnListsCurrying: [A, B](lst: List[A], v: B)(f: (A, B) => B)B
+
+scala> operateOnListsCurrying(sampleList,0)(_ + _) //Since we made our function as a curried function we are able to use underscore notation while calling the function
+res5: Int = 32
+
+scala> operateOnListsCurrying(sampleList,1)(_ * _)
+res6: Int = 8640
+
+scala> operateOnListsCurrying(sampleList,Int.MaxValue)(_ min _)
+res7: Int = 1
+
+scala> operateOnListsCurrying(sampleList,"Dharani")((x,y) => y + x.toString)
+res8: String = Dharani9514328
+
+scala> operateOnListsCurrying(sampleList,"Dharani")((x,y) => x.toString + y)
+res9: String = 8234159Dharani
+
+Currying :-
+------------
+
+The curried function will take several argument list instead of a single list with multiple arguments.
+We can create curried function in multiple ways.
+
+scala> def add(x : Int) : Int => Int = y => x + y //add function takes in a parameter and returns a function
+add: (x: Int)Int => Int
+
+scala> val plus5 = add(5) //When we declare functions like add we can partially call the function with single argument
+plus5: Int => Int = $$Lambda$843/0x00000008005d7840@38d08cb5
+
+scala> plus5(100) //pasing the argument to the partially applied function
+res0: Int = 105
+
+scala> add(10)(20) //We can pass 2 arguments to the add function directly like this
+res1: Int = 30
+
+Another way of creating the curried function.
+
+scala> def add2(x : Int)(y : Int) = x + y
+add2: (x: Int)(y: Int)Int
+
+scala> add2(10)(20)
+res2: Int = 30
+
+scala> val plus10 = add2(10)_ //using this syntax we can create a partially applied function
+plus10: Int => Int = $$Lambda$861/0x00000008005f1040@351ede23
+
+scala> plus10(100) //calling the partially applied function with second argument
+res3: Int = 110
+
+Let's say if we want to define a function which will take multiple variable length arguments.
+As we know the variable length argument should be the last parameter to the function we can't define it using regular syntax.
+Instead we can use currying to do this.
+
+scala> def multipleVarArgs(subjects : String*)(marks : Int*)(result : String*) : Unit = {
+     |   subjects.foreach(println)
+     |   println(marks.sum)
+     |   result.foreach(println)
+     | }
+multipleVarArgs: (subjects: String*)(marks: Int*)(result: String*)Unit
+
+scala> multipleVarArgs("C","C++","Java")(100,80,90)("PASS","FAIL")
+C
+C++
+Java
+270
+PASS
+FAIL
+
+When we define a curried function we can use code blocks while calling the function like this.
+
+scala> def curriedAdd(x : Int)(y : Int) : Int = x + y
+curriedAdd: (x: Int)(y: Int)Int
+
+scala> curriedAdd{println("Hi")
+     | 10 } {println("Bye")
+     | 20}
+Hi
+Bye
+res0: Int = 30
+
+This type of syntax is not possible with normal functions.
+
+Pass By Name :-
+------------------
+
+The fill method in scala uses pass by name.
+In the normal function the arguments gets evaluated first and then the function is called.
+
+scala> def incr(i : Int) : Int = {
+     |   println("Starting the incr function")
+     |   i + 1
+     | }
+incr: (i: Int)Int
+
+scala> incr{ println("Passing the arguments to the incr function")
+     |  3 + 4 }
+Passing the arguments to the incr function
+Starting the incr function
+res0: Int = 8
+
+Declaring a function which takes a function with no arguments and returns Int.
+
+scala> def incrFunc(i : () => Int) : Int = {
+     |   println("Starting the incrFunc function")
+     |   i() + 1
+     | }
+incrFunc: (i: () => Int)Int
+
+scala> incrFunc {
+     |  () => {
+     |    println("Passing arguments to incrFunc function")
+     |    3 + 4
+     |  }
+     | }
+Starting the incrFunc function
+Passing arguments to incrFunc function
+res0: Int = 8
+
+In this case the function is started first and then the arguments are evaluated for each iteration.
+Another way of writing the above function.
+
+scala> def incrByName(i: => Int) : Int = {
+     |   println("Starting the incrByName function")
+     |   i + 1
+     | }
+incrByName: (i: => Int)Int
+
+scala> incrByName{
+     |   println("Passing arguments to the incrByName function")
+     |   3 + 4
+     | }
+Starting the incrByName function
+Passing arguments to the incrByName function
+res0: Int = 8
+
+This syntax is much easier to write and understand.
+Let's write few more example of pass by name functions.
+
+scala> def thriceMultiplied(x : Int) : Int = x * x * x
+thriceMultiplied: (x: Int)Int
+
+scala> thriceMultiplied(10) //the argument gets evaluated only once
+res1: Int = 1000
+
+scala> def thriceMultipliedByName(x: => Int) : Int = x * x * x //the arguments gets evaluated for every iteration
+thriceMultipliedByName: (x: => Int)Int
+
+scala> var i = 0
+i: Int = 0
+
+scala> thriceMultipliedByName{ i += 1; i}
+res2: Int = 6
+
+scala> def threeTupleByName(a: => Int) : (Int,Int,Int) = (a,a,a) //here as well the arguments gets evaluated for every iteration
+threeTupleByName: (a: => Int)(Int, Int, Int)
+
+scala> threeTupleByName(util.Random.nextInt(100))
+res4: (Int, Int, Int) = (47,32,68)
+
+scala> threeTupleByName(util.Random.nextInt(100))
+res5: (Int, Int, Int) = (35,46,5)
+
+Collections :-
+--------------
+
+Arrays :-
+---------
+
+Array is a collection which can hold multiple values in a single variable.
+Arrays are mutable.
+Arrays ar zero index based.
+Once we create an array the length of the array remains constant we can not change it we can change the values though.
+We will use array when we know the number of elements upfront.
+
+scala> val a = Array(7,5,3,9,6,1,2) //The simplest way to create an array
+a: Array[Int] = Array(7, 5, 3, 9, 6, 1, 2)
+
+scala> val b = Array[Int](10,20,30,40,50) //We can explicitly specify the type if we want to
+b: Array[Int] = Array(10, 20, 30, 40, 50)
+
+scala> a(1) //Accessing the second element of the array
+res9: Int = 5
+
+scala> a(3) //Accessing the 4th element of the array
+res10: Int = 9
+
+scala> a(30) //If we try to access the index which doesn't exist we get ArrayIndexOutOfBoundsException
+java.lang.ArrayIndexOutOfBoundsException: Index 30 out of bounds for length 7
+  ... 28 elided
+
+scala> a.length //length method can be used to the number of elements present in the array
+res11: Int = 7
+
+scala> a.mkString(",") //mkString method is used to return a string with all the array elements separated by the separator we pass
+res12: String = 7,5,3,9,6,1,2
+
+scala> a(2) = 99 //Modifying the third element of the array
+
+scala> a.mkString(",") //Array after modifying the third element
+res14: String = 7,5,99,9,6,1,2
+
+The below function will take an array as a parameter and change all the value of it.
+
+scala> def fillArray(a : Array[Int], i : Int, v : Int) : Unit = {
+     |   if(i < a.length) {
+     |     a(i) = v
+     |     fillArray(a, i + 1,v)
+     |   }
+     | }
+fillArray: (a: Array[Int], i: Int, v: Int)Unit
+
+scala> val sampleArray = Array(1,1,1,1,1,1)
+sampleArray: Array[Int] = Array(1, 1, 1, 1, 1, 1)
+
+scala> fillArray(sampleArray,0,99)
+
+scala> sampleArray
+res6: Array[Int] = Array(99, 99, 99, 99, 99, 99)
+
+The below function will perform several arithmetic operations on Arrays.
+
+scala> val numArray = Array(7,5,3,9,6,1,2)
+numArray: Array[Int] = Array(7, 5, 3, 9, 6, 1, 2)
+
+scala> def operateOnArrays(a : Array[Int],i : Int, v : Int,f : (Int,Int) => Int) : Int = {
+     |   if(i == a.length) v
+     |   else operateOnArrays(a,i + 1,f(a(i),v),f)
+     | }
+operateOnArrays: (a: Array[Int], i: Int, v: Int, f: (Int, Int) => Int)Int
+
+scala> operateOnArrays(numArray,0,0,_ + _)
+res1: Int = 33
+
+scala> operateOnArrays(numArray,0,1,_ * _)
+res2: Int = 11340
+
+scala> operateOnArrays(numArray,0,Int.MaxValue,_ min _)
+res3: Int = 1
+
+scala> operateOnArrays(numArray,0,Int.MinValue,_ max _)
+res4: Int = 9
+
+Lists :-
+-------
+
+Arrays aren't the only ways we use to store multiple values in a single variable.
+We have lists which also does the same but varies a lot with arrays.
+Lists are zero index based.
+Lists are immutable.
+To prepend an element to List use cons(::) operator.
+Just like arrays we can access the elements using index.
+Lists will work good if we don't know the number of elements upfront.
+
+scala> val sampleList = List(9,4,2,5,1) //simple way of creating list
+sampleList: List[Int] = List(9, 4, 2, 5, 1)
+
+scala> 99 :: sampleList //The cons(::) operator is a right associativity operator meaning if we write 10 :: sampleList it will get converted as sampleList.::(10)
+res0: List[Int] = List(99, 9, 4, 2, 5, 1)
+
+scala> Nil //We can use Nil to create an empty list
+res1: scala.collection.immutable.Nil.type = List()
+
+scala> 10 :: 20 :: 30 :: 40 :: Nil //Another way of creating list using Nil
+res2: List[Int] = List(10, 20, 30, 40)
+
+scala> sampleList(0) //Accessing the elements using index
+res4: Int = 9
+
+scala> sampleList(3)
+res5: Int = 5
+
+scala> sampleList(10) //If we specify the index which doesn't exist we get IndexOutOfBoundsException
+java.lang.IndexOutOfBoundsException: 10
+  at scala.collection.LinearSeqOps.apply(LinearSeq.scala:118)
+  at scala.collection.LinearSeqOps.apply$(LinearSeq.scala:115)
+  at scala.collection.immutable.List.apply(List.scala:82)
+  ... 28 elided
+
+scala> sampleList.head //head method returns the first element of the list
+res7: Int = 9
+
+scala> sampleList.tail //tail method gives all the elements in the list except the first element
+res8: List[Int] = List(4, 2, 5, 1)
+
+Take the number of integers you want to add and take input from the user for every integer and create list out of it.
+
+Program :-
+------------
+
+bash-3.2$ cat revision.scala
+import scala.io.StdIn._
+
+print("Enter the number of elements you want to add to list :- ")
+val n = readInt
+println(s"The output list is :- ${createList(n,Nil)}")
+
+def createList(n : Int, v : List[Int]) : List[Int] = {
+  if(n == 0) v.reverse
+  else {
+    print("Enter the integer :- ")
+    val input = readInt
+    createList(n - 1,input :: v)
+  }
+}
+
+Output :-
+----------
+
+bash-3.2$ scala revision.scala
+Enter the number of elements you want to add to list :- 5
+Enter the integer :- 100
+Enter the integer :- 200
+Enter the integer :- 300
+Enter the integer :- 400
+Enter the integer :- 500
+The output list is :- List(100, 200, 300, 400, 500)
+
+scala> def operateOnLists(lst :List[Int],v : Int, f : (Int,Int) => Int) : Int = lst match {
+     |   case Nil  => v
+     |   case h :: t => operateOnLists(t,f(h,v),f) //this pattern matching is very very useful in case of lists remember it
+     | }
+operateOnLists: (lst: List[Int], v: Int, f: (Int, Int) => Int)Int
+
+scala> val sampleList = List(10,20,30,40)
+sampleList: List[Int] = List(10, 20, 30, 40)
+
+scala> operateOnLists(sampleList,0,_ + _)
+res1: Int = 100
+
+scala> operateOnLists(sampleList,0,_ - _)
+res2: Int = 20
+
+scala> operateOnLists(sampleList,1,_ * _)
+res3: Int = 240000
+
+scala> operateOnLists(sampleList,Int.MaxValue,_ min _)
+res5: Int = 10
+
+fill method :-
+--------------
+
+We can use fill method to create Lists/Arrays.
+fill method takes two arguments.
+First argument is the length of the array we want to create.
+Second argument is the value to be filled in the array which gets evaluated for each iteration.
+
+scala> List.fill(10)(5)
+res6: List[Int] = List(5, 5, 5, 5, 5, 5, 5, 5, 5, 5)
+
+scala> List.fill(10)(util.Random.nextInt(100))
+res7: List[Int] = List(54, 74, 9, 63, 99, 60, 11, 99, 10, 38)
+
+scala> var i = 0
+i: Int = 0
+
+scala> List.fill(20)({i += 2;i})
+res8: List[Int] = List(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40)
+
+tabulate method :-
+---------------------
+
+The tabulate method is same like fill method except the second argument is a function.
+The parameter we get on each iteration is the index of the array.
+
+scala> List.tabulate(10)(i => i)
+res9: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+scala> List.tabulate(10)(i => i + 1)
+res10: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> List.tabulate(10)(_ * 2) //We can use underscore notation as well
+res11: List[Int] = List(0, 2, 4, 6, 8, 10, 12, 14, 16, 18)
+
+scala> List.tabulate(10)(i => 7) //We can completely ignore the index as well
+res12: List[Int] = List(7, 7, 7, 7, 7, 7, 7, 7, 7, 7)
+
+Multi-dimensional Arrays :-
+------------------------------
+
+scala> val twoDArray = Array(Array(10,20,30,40,50),Array(60,70,80,90)) //Simple way to create a two dimensional array
+twoDArray: Array[Array[Int]] = Array(Array(10, 20, 30, 40, 50), Array(60, 70, 80, 90))
+
+scala> twoDArray(0)(2) //Accessing the elements of a two dimensional array
+res1: Int = 30
+
+scala> twoDArray(1)(3)
+res2: Int = 90
+
+scala> twoDArray(1)(4) //If we try to access index which doesn't exist we get ArrayIndexOutOfBoundsException
+java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4
+  ... 28 elided
+
+We can use fill and tabulate method to create multi-dimensional arrays/lists.
+While using fill method to create multi-dimensional arrays we need to pass two arguments.
+First argument is the length of the array.
+Second argument is the number of elements inside the internal array.
+
+scala> Array.fill(5,2)(0)
+res6: Array[Array[Int]] = Array(Array(0, 0), Array(0, 0), Array(0, 0), Array(0, 0), Array(0, 0))
+
+scala> Array.fill(6,5)(util.Random.nextInt(10)) //creating a two dimensional array with fill method
+res7: Array[Array[Int]] = Array(Array(9, 2, 5, 6, 5), Array(6, 8, 1, 0, 9), Array(9, 4, 8, 9, 4), Array(1, 9, 4, 1, 1), Array(6, 4, 6, 0, 5), Array(1, 3, 1, 1, 1))
+
+In the same way like fill we can use tabulate method as well to create two dimensional arrays/Lists.
+
+scala> List.tabulate(5,5)((i,j) => 5)
+res16: List[List[Int]] = List(List(5, 5, 5, 5, 5), List(5, 5, 5, 5, 5), List(5, 5, 5, 5, 5), List(5, 5, 5, 5, 5), List(5, 5, 5, 5, 5))
+
+scala> List.tabulate(5,5)((i,j) => (i + 1) * (j + 1))
+res17: List[List[Int]] = List(List(1, 2, 3, 4, 5), List(2, 4, 6, 8, 10), List(3, 6, 9, 12, 15), List(4, 8, 12, 16, 20), List(5, 10, 15, 20, 25))
+
+scala> List.tabulate(5,5)((i,j) => (i + 1) * (j + 1)).foreach(a => println(a.mkString(",")))
+1,2,3,4,5
+2,4,6,8,10
+3,6,9,12,15
+4,8,12,16,20
+5,10,15,20,25
+
+These multi-dimesional arrays are homogeneous which are very easy to create and access.
+Let's create heterogeneous arrays/lists which have different data type inside it and are challenging to access the elements.
+
+scala> val twoDHeteroArray = Array(Array(10,20,30,40,50),List(40,50,60),(100,200,300),4.56,"Dharani")
+twoDHeteroArray: Array[Any] = Array(Array(10, 20, 30, 40, 50), List(40, 50, 60), (100,200,300), 4.56, Dharani)
+
+scala> twoDHeteroArray(0).asInstanceOf[Array[Int]](3)
+res28: Int = 40
+
+scala> twoDHeteroArray(1).asInstanceOf[List[Int]](2)
+res30: Int = 60
+
+scala> twoDHeteroArray(4).asInstanceOf[String]
+res31: String = Dharani
+
+scala> twoDHeteroArray(2).asInstanceOf[Tuple3[Int,Int,Int]]
+res32: (Int, Int, Int) = (100,200,300)
+
+scala> twoDHeteroArray(2).asInstanceOf[Tuple3[Int,Int,Int]]._2
+res33: Int = 200
+
+Don't try to use this heterogeneous collection which can create lot of confusion and are very hard to read.
+
+Collection Methods :-
+-----------------------
+
+drop method :- drops elements from the list and returns a new list
+init method :- returns a new list without the last element
+last method :- returns the last element of the list
+head method :- returns the first element of the list
+tail method :- returns a new list without the first element
+slice method :- returns a new list with the elements b/w fromIndex and toIndex(not inclusive)
+splitAt method :- returns a tuple of new lists which are split at the index we specify
+take method :- takes elements from the list and returns a new list
+takeRight method :- same like take but works from right to left
+dropRight method :- same like drop but works from right to left
+contains method :- returns true if the value we specify exists in the collection otherwise returns false
+startsWith method :- checks whether the collection starts with the sequence of values we specify or not
+endsWith method :- checks whether the collection ends with the sequence of values we specify or not
+isEmpty :- to check whether the collection is empty or not
+nonEmpty :- to check whether the collection is nonEmpty or not
+indexOf method :- returns the first index of the element we specify
+lastIndexOf method :- returns the last index of the element we specify
+diff method :- will remove all the elements we specify from the original list duplicates are not ignored it doesn't do anything if the elements we specify doesn't exist in the collection
+distinct :- removes duplicates from the collection
+mkString :- will create a string out of the collection elements
+There is a method called patch which takes 3 arguments
+First argument -- The index from where patching should start
+Second argument -- the content which needs to be patched
+Third argument -- The number of elements you want to patch the content with
+reverse method :- reverse the contents of the collection
+The below methods will work only on collections where all the values are Int
+min, max, sum, product
+
+We can use toArray and toList to convert the collection to other types
+zip method :- will combine the elements of two collections it will stop as soon as any collection ends
+zipWithIndex :- returns a new list of two valued tuples with value and it's index as an element
+map function :- takes a function as an argument and applies that function to all the elements in the collection
+filter function :- takes a boolean function and returns all the elements that satisfy the condition
+filterNot function :- same like filter but returns elements that do not satisfy the condition
+count :- takes in a boolean function and returns the number of elements that satisfy the condition
+dropWhile :- drops all the elements that satisfy the condition and returns all the elements after that once the condition becomes false
+exists :- returns true if there is any element in the collection that satisfies the condition otherwise returns false
+flatMap :- requires a function that returns a collection but instead of generating multiple collections it will generate single collection
+forall :- checks whether the boolean function is true for all the elements in the collection or not
+foreach :- accepts a function that returns Unit
+indexWhere :- returns the first index of the element which satisfies the condition otherwise returns -1
+lastIndexWhere :- same like indexWhere but searches from last
+partition :- returns a tuple of collection where the first collection contains the elements that satisfy the condition and the second collection contains the elements that do not satisfy the condition
+takeWhile :- returns all the elements that satisfy the condition stops returning the elements once the condition becomes false
+
+Ignore these two functions for now since don't find them that much useful.
+
+reduceLeft :- takes a function with two arguments and perform the operation we specify inside the function
+fold :- same like reduce but it will overcome some of the limitations of reduce
+
+
+combinations :- returns all the combinations of the number of elements we specify the order doesn't matter here
+grouped :- groups collection elements into the number we specify and returns an Iterator
+inits :- will remove the last element from the collection on each iteration. The last collection returned is an empty collection
+tails :- same like inits but will remove the first element on each iteration
+permutations :- same like combinations but it will consider the order of the elements as well
+sliding :- sliding is same like grouped but the elements will be overlapped
+
+Collection Method Practice Program 1 :-
+--------------------------------------------
+
+bash-3.2$ cat revision.scala
+val sampleList = List(7,5,3,9,6,1,2,1)
+println(s"sampleList :- $sampleList")
+println(s"sampleList.drop(2) :- ${sampleList.drop(2)}")
+println(s"sampleList.init :- ${sampleList.init}")
+println(s"sampleList.last :- ${sampleList.last}")
+println(s"sampleList.head :- ${sampleList.head}")
+println(s"sampleList.tail :- ${sampleList.tail}")
+println(s"sampleList.slice(3,7) :- ${sampleList.slice(3,7)}")
+println(s"sampleList.splitAt(3) :- ${sampleList.splitAt(3)}")
+println(s"sampleList.take(3) :- ${sampleList.take(3)}")
+println(s"sampleList.takeRight(3) :- ${sampleList.takeRight(3)}")
+println(s"sampleList.dropRight(3) :- ${sampleList.dropRight(3)}")
+println(s"sampleList.contains(6) :- ${sampleList.contains(6)}")
+println(s"sampleList.contains(99) :- ${sampleList.contains(99)}")
+println(s"sampleList.startsWith(Array(7,5)) :- ${sampleList.startsWith(Array(7,5))}")
+println(s"sampleList.startsWith(Seq(7,5,9)) :- ${sampleList.startsWith(Seq(7,5,9))}")
+println(s"sampleList.endsWith(Seq(2,1)) :- ${sampleList.endsWith(Seq(2,1))}")
+println(s"sampleList.endsWith(List(6,2,1)) :- ${sampleList.endsWith(Seq(6,2,1))}")
+println(s"sampleList.isEmpty :- ${sampleList.isEmpty}")
+println(s"sampleList.nonEmpty :- ${sampleList.nonEmpty}")
+println(s"sampleList.indexOf(1) :- ${sampleList.indexOf(1)}")
+println(s"sampleList.indexOf(1,6) :- ${sampleList.indexOf(1,6)}")
+println(s"sampleList.indexOf(23) :- ${sampleList.indexOf(23)}")
+println(s"sampleList.lastIndexOf(1) :- ${sampleList.lastIndexOf(1)}")
+println(s"sampleList.lastIndexOf(1,6) :- ${sampleList.lastIndexOf(1,6)}")
+println(s"sampleList.diff(Array(1,2,3,4,5,6) :- ${sampleList.diff(Array(1,2,3,4,5,6))}")
+println(s"sampleList.distinct :- ${sampleList.distinct}")
+println(s"sampleList.mkString :- ${sampleList.mkString}")
+println(s"""sampleList.mkString(",") :- ${sampleList.mkString(",")}""")
+println(s"sampleList.patch(2,Nil,4) :- ${sampleList.patch(2,Nil,4)}") //Replacing 4 elements starting from index 2 with nothing
+println(s"sampleList.patch(3,List(100,200,300,400),1) :- ${sampleList.patch(3,List(100,200,300,400),1)}") //The patching content can have more elements than the elements we are replacing with
+println(s"sampleList.reverse :- ${sampleList.reverse}")
+println(s"sampleList.min :- ${sampleList.min}")
+println(s"sampleList.max :- ${sampleList.max}")
+println(s"sampleList.sum :- ${sampleList.sum}")
+println(s"sampleList.product :- ${sampleList.product}")
+
+val romanArray = Array("I","II","III","IV","V")
+val numsArray = List(1,2,3,4,5,6,7,8,9)
+println(s"""romanArray.zip(numsArray).mkString(",") :- ${romanArray.zip(numsArray).mkString(",")}""")
+println(s"numsArray.zip(romanArray) :- ${numsArray.zip(romanArray)}")//The type we get when we call zip method is based on the collection type we are calling
+
+println(s"sampleList.zipWithIndex :- ${sampleList.zipWithIndex}")
+println(s"sampleList.map(x => x * 2) :- ${sampleList.map(x => x * 2)}")
+println(s"sampleList.map( _ * 2) :- ${sampleList.map( _ * 2)}")
+println(s"sampleList.map(x => x * x) :- ${sampleList.map(x => x * x)}")
+
+println(s"sampleList.filter(x => x % 2 == 0) :- ${sampleList.filter(x => x % 2 == 0)}")
+println(s"sampleList.filter(x => x % 2 == 1)  :- ${sampleList.filter(x => x % 2 == 1)}")
+println(s"sampleList.filterNot(_ % 2 == 0)  :- ${sampleList.filterNot( _ % 2 == 0)}")
+println(s"sampleList.filter(_ % 2 == 0).map(_ * 2) :- ${sampleList.filter(_ % 2 == 0).map(_ * 2)}")
+println(s"sampleList.count(x => x > 7) :- ${sampleList.count(x => x > 7)}")
+println(s"sampleList.dropWhile(_ < 9) :- ${sampleList.dropWhile(_ < 9)}")
+println(s"sampleList.dropWhile(_ > 1) :- ${sampleList.dropWhile(_ > 1)}")
+println(s"sampleList.exists(x => x % 12 == 0) :- ${sampleList.exists(_ % 12 == 0)}")
+println(s"sampleList.exists(x => x % 9 == 0) :- ${sampleList.exists(_ % 9 == 0)}")
+println(s"sampleList.map(x => List.fill(10)(x)) :- ${sampleList.map(x => List.fill(10)(x))}")
+println(s"sampleList.flatMap(x => List.fill(10)(x)) :- ${sampleList.flatMap(x => List.fill(10)(x))}")
+println(s"sampleList.forall( _ < 10) :- ${sampleList.forall( _ < 10)}")
+println(s"sampleList.forall( _ > 9) :- ${sampleList.forall( _ > 9)}")
+sampleList.foreach(println)
+println(s"sampleList.indexWhere( _ > 8 ) :- ${sampleList.indexWhere(_ > 8)}")
+println(s"sampleList.indexWhere( _ > 10) :- ${sampleList.indexWhere(_ > 10)}")
+println(s"sampleList.lastIndexWhere( _ >= 1) :- ${sampleList.lastIndexWhere( _ >= 1)}")
+println(s"sampleList.partition(_ % 2 == 0) :- ${sampleList.partition( _ % 2 == 0)}")
+println(s"sampleList.takeWhile(_ < 9) :- ${sampleList.takeWhile(_ < 9)}")
+
+Output :-
+----------
+
+bash-3.2$ scala revision.scala
+sampleList :- List(7, 5, 3, 9, 6, 1, 2, 1)
+sampleList.drop(2) :- List(3, 9, 6, 1, 2, 1)
+sampleList.init :- List(7, 5, 3, 9, 6, 1, 2)
+sampleList.last :- 1
+sampleList.head :- 7
+sampleList.tail :- List(5, 3, 9, 6, 1, 2, 1)
+sampleList.slice(3,7) :- List(9, 6, 1, 2)
+sampleList.splitAt(3) :- (List(7, 5, 3),List(9, 6, 1, 2, 1))
+sampleList.take(3) :- List(7, 5, 3)
+sampleList.takeRight(3) :- List(1, 2, 1)
+sampleList.dropRight(3) :- List(7, 5, 3, 9, 6)
+sampleList.contains(6) :- true
+sampleList.contains(99) :- false
+sampleList.startsWith(Array(7,5)) :- true
+sampleList.startsWith(Seq(7,5,9)) :- false
+sampleList.endsWith(Seq(2,1)) :- true
+sampleList.endsWith(List(6,2,1)) :- false
+sampleList.isEmpty :- false
+sampleList.nonEmpty :- true
+sampleList.indexOf(1) :- 5
+sampleList.indexOf(1,6) :- 7
+sampleList.indexOf(23) :- -1
+sampleList.lastIndexOf(1) :- 7
+sampleList.lastIndexOf(1,6) :- 5
+sampleList.diff(Array(1,2,3,4,5,6) :- List(7, 9, 1)
+sampleList.distinct :- List(7, 5, 3, 9, 6, 1, 2)
+sampleList.mkString :- 75396121
+sampleList.mkString(",") :- 7,5,3,9,6,1,2,1
+sampleList.patch(2,Nil,4) :- List(7, 5, 2, 1)
+sampleList.patch(3,List(100,200,300,400),1) :- List(7, 5, 3, 100, 200, 300, 400, 6, 1, 2, 1)
+sampleList.reverse :- List(1, 2, 1, 6, 9, 3, 5, 7)
+sampleList.min :- 1
+sampleList.max :- 9
+sampleList.sum :- 34
+sampleList.product :- 11340
+romanArray.zip(numsArray).mkString(",") :- (I,1),(II,2),(III,3),(IV,4),(V,5)
+numsArray.zip(romanArray) :- List((1,I), (2,II), (3,III), (4,IV), (5,V))
+sampleList.zipWithIndex :- List((7,0), (5,1), (3,2), (9,3), (6,4), (1,5), (2,6), (1,7))
+sampleList.map(x => x * 2) :- List(14, 10, 6, 18, 12, 2, 4, 2)
+sampleList.map( _ * 2) :- List(14, 10, 6, 18, 12, 2, 4, 2)
+sampleList.map(x => x * x) :- List(49, 25, 9, 81, 36, 1, 4, 1)
+sampleList.filter(x => x % 2 == 0) :- List(6, 2)
+sampleList.filter(x => x % 2 == 1)  :- List(7, 5, 3, 9, 1, 1)
+sampleList.filterNot(_ % 2 == 0)  :- List(7, 5, 3, 9, 1, 1)
+sampleList.filter(_ % 2 == 0).map(_ * 2) :- List(12, 4)
+sampleList.count(x => x > 7) :- 1
+sampleList.dropWhile(_ < 9) :- List(9, 6, 1, 2, 1)
+sampleList.dropWhile(_ > 1) :- List(1, 2, 1)
+sampleList.exists(x => x % 12 == 0) :- false
+sampleList.exists(x => x % 9 == 0) :- true
+sampleList.map(x => List.fill(10)(x)) :- List(List(7, 7, 7, 7, 7, 7, 7, 7, 7, 7), List(5, 5, 5, 5, 5, 5, 5, 5, 5, 5), List(3, 3, 3, 3, 3, 3, 3, 3, 3, 3), List(9, 9, 9, 9, 9, 9, 9, 9, 9, 9), List(6, 6, 6, 6, 6, 6, 6, 6, 6, 6), List(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), List(2, 2, 2, 2, 2, 2, 2, 2, 2, 2), List(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+sampleList.flatMap(x => List.fill(10)(x)) :- List(7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+sampleList.forall( _ < 10) :- true
+sampleList.forall( _ > 9) :- false
+7
+5
+3
+9
+6
+1
+2
+1
+sampleList.indexWhere( _ > 8 ) :- 3
+sampleList.indexWhere( _ > 10) :- -1
+sampleList.lastIndexWhere( _ >= 1) :- 7
+sampleList.partition(_ % 2 == 0) :- (List(6, 2),List(7, 5, 3, 9, 1, 1))
+sampleList.takeWhile(_ < 9) :- List(7, 5, 3)
+
+Collection Methods Practice Program 2 :-
+---------------------------------------------
+
+The below methods returns an iterator which will be gone once we consume the elements.
+Iterators have methods called next which will return the next element.
+Iterators also have a method called hasNext which will tell us whether the iterator has an element or not.
+We can convert the iterator to other collection types using methods like toList, toArray etc., but be careful while you do it since iterator can have many elements and can cause OOM errors.
+
+bash-3.2$ cat revision.scala
+val sampleList =  List(7, 5, 3, 9, 6, 1, 2, 1)
+println(s"combinations method :- ")
+sampleList.combinations(3).foreach(a => println(a.mkString(",")))
+println("grouped method")
+List.fill(15)(util.Random.nextInt(100)).grouped(4).foreach(a => println(a.mkString(",")))
+println("inits method")
+sampleList.inits.foreach(a => println(a.mkString(",")))
+println("tails method")
+sampleList.tails.foreach(a => println(a.mkString(",")))
+println("permutations method which doesn't take any argument")
+List.fill(3)(util.Random.nextInt(100)).permutations.foreach(a => println(a.mkString))
+println("sliding method")
+sampleList.sliding(5).foreach(a => println(a.mkString(",")))
+
+Output :-
+----------
+
+bash-3.2$ scala revision.scala
+combinations method :-
+7,5,3
+7,5,9
+7,5,6
+7,5,1
+7,5,2
+7,3,9
+7,3,6
+7,3,1
+7,3,2
+7,9,6
+7,9,1
+7,9,2
+7,6,1
+7,6,2
+7,1,1
+7,1,2
+5,3,9
+5,3,6
+5,3,1
+5,3,2
+5,9,6
+5,9,1
+5,9,2
+5,6,1
+5,6,2
+5,1,1
+5,1,2
+3,9,6
+3,9,1
+3,9,2
+3,6,1
+3,6,2
+3,1,1
+3,1,2
+9,6,1
+9,6,2
+9,1,1
+9,1,2
+6,1,1
+6,1,2
+1,1,2
+grouped method
+45,52,47,41
+54,45,6,21
+83,55,19,14
+37,10,76
+inits method
+7,5,3,9,6,1,2,1
+7,5,3,9,6,1,2
+7,5,3,9,6,1
+7,5,3,9,6
+7,5,3,9
+7,5,3
+7,5
+7
+
+tails method
+7,5,3,9,6,1,2,1
+5,3,9,6,1,2,1
+3,9,6,1,2,1
+9,6,1,2,1
+6,1,2,1
+1,2,1
+2,1
+1
+
+permutations method which doesn't take any argument
+69527
+69275
+56927
+52769
+27695
+27569
+sliding method
+7,5,3,9,6
+5,3,9,6,1
+3,9,6,1,2
+9,6,1,2,1
+
+flatten method instead of flatMap :-
+----------------------------------------
+
+scala> val twoDList = List.fill(10,5)(util.Random.nextInt(100))
+twoDList: List[List[Int]] = List(List(76, 9, 45, 82, 53), List(20, 41, 59, 22, 80), List(39, 31, 96, 20, 82), List(16, 98, 50, 53, 21), List(34, 30, 16, 36, 22), List(2, 78, 68, 31, 86), List(92, 24, 36, 12, 15), List(83, 5, 8, 93, 70), List(20, 31, 73, 4, 89), List(70, 80, 47, 90, 43))
+
+scala> twoDList.flatMap(identity) //identity takes a value and returns it unchanged
+res17: List[Int] = List(76, 9, 45, 82, 53, 20, 41, 59, 22, 80, 39, 31, 96, 20, 82, 16, 98, 50, 53, 21, 34, 30, 16, 36, 22, 2, 78, 68, 31, 86, 92, 24, 36, 12, 15, 83, 5, 8, 93, 70, 20, 31, 73, 4, 89, 70, 80, 47, 90, 43)
+
+scala> twoDList.flatten //On the other hand flatten is much simpler and easier to use
+res19: List[Int] = List(76, 9, 45, 82, 53, 20, 41, 59, 22, 80, 39, 31, 96, 20, 82, 16, 98, 50, 53, 21, 34, 30, 16, 36, 22, 2, 78, 68, 31, 86, 92, 24, 36, 12, 15, 83, 5, 8, 93, 70, 20, 31, 73, 4, 89, 70, 80, 47, 90, 43)
+
+Maps :-
+--------
+
+Immutable Maps :-
+---------------------
+
+Map is a collection where we store data in key-value pairs.
+We can simply create a Map using Map("One" -> 1, "Two" -> 2, "Three" -> 3).
+We can access the elements using the index with whatever the key type is.
+The key type of the Map should be an immutable type.
+We can add elements using + and at the same time we can remove elements using -
+We can convert sequence of tuples to map using toMap function.
+Maps do not preserve order.
+
+scala> val numMap = Map("One" -> 1,"Two" -> 2,"Three" -> 3) //By default when we create a map it will be an immutable map
+numMap: scala.collection.immutable.Map[String,Int] = Map(One -> 1, Two -> 2, Three -> 3)
+
+scala> numMap + ("Four" -> 4) //To add a new element to the map we can use + method.
+res1: scala.collection.immutable.Map[String,Int] = Map(One -> 1, Two -> 2, Three -> 3, Four -> 4)
+
+scala> numMap //Since we created an immutable map the original map didn't change at all
+res2: scala.collection.immutable.Map[String,Int] = Map(One -> 1, Two -> 2, Three -> 3)
+
+scala> numMap ++ List(("Five" -> 5),("Six" -> 6)) //To add multiple elements at the same time to the map we can use ++ method
+res3: scala.collection.immutable.Map[String,Int] = HashMap(One -> 1, Five -> 5, Two -> 2, Three -> 3, Six -> 6)
+
+scala> numMap - "Two" //To remove an element we can use - method while removing we need just pass the key
+res4: scala.collection.immutable.Map[String,Int] = Map(One -> 1, Three -> 3)
+
+scala> numMap -- List("One","Three") //Similar -- will remove multiple elements at the same time
+res5: scala.collection.immutable.Map[String,Int] = Map(Two -> 2)
+
+scala> numMap("One") //We can access the elements using index
+res8: Int = 1
+
+scala> numMap("One1") //If the specified key doesn't exist we get NoSuchElementException
+java.util.NoSuchElementException: key not found: One1
+  at scala.collection.immutable.Map$Map3.apply(Map.scala:337)
+  ... 28 elided
+
+scala> val newMap = (1 to 20).map(i => i.toString -> i).toMap //converting a sequence of tuples to Map using toMap function
+newMap: scala.collection.immutable.Map[String,Int] = HashMap(12 -> 12, 8 -> 8, 19 -> 19, 4 -> 4, 13 -> 13, 16 -> 16, 5 -> 5, 10 -> 10, 20 -> 20, 2 -> 2, 18 -> 18, 7 -> 7, 3 -> 3, 15 -> 15, 11 -> 11, 9 -> 9, 6 -> 6, 1 -> 1, 17 -> 17, 14 -> 14)
+
+scala> for(t <- newMap) println(t) //printing all the elements of the newly created map
+(12,12)
+(8,8)
+(19,19)
+(4,4)
+(13,13)
+(16,16)
+(5,5)
+(10,10)
+(20,20)
+(2,2)
+(18,18)
+(7,7)
+(3,3)
+(15,15)
+(11,11)
+(9,9)
+(6,6)
+(1,1)
+(17,17)
+(14,14)
+
+scala> for((k,v) <- newMap) println(s"$k --> $v") //we can use pattern matching ability of for loops to print in the format we require
+12 --> 12
+8 --> 8
+19 --> 19
+4 --> 4
+13 --> 13
+16 --> 16
+5 --> 5
+10 --> 10
+20 --> 20
+2 --> 2
+18 --> 18
+7 --> 7
+3 --> 3
+15 --> 15
+11 --> 11
+9 --> 9
+6 --> 6
+1 --> 1
+17 --> 17
+14 --> 14
+
+scala> newMap.map(t => t._1 * 2 -> t._2 * 2).foreach(println)
+(11,2)
+(99,18)
+(1212,24)
+(1313,26)
+(1919,38)
+(1414,28)
+(1717,34)
+(1818,36)
+(1616,32)
+(2020,40)
+(66,12)
+(88,16)
+(77,14)
+(44,8)
+(33,6)
+(22,4)
+(55,10)
+(1515,30)
+(1010,20)
+(1111,22)
+
+scala> newMap.map(t => t._1 * 2).foreach(println)
+1212
+88
+1919
+44
+1313
+1616
+55
+1010
+2020
+22
+1818
+77
+33
+1515
+1111
+99
+66
+11
+1717
+1414
+
+scala> newMap.filter(t => t._2 < 5).foreach(println)
+(4,4)
+(1,1)
+(2,2)
+(3,3)
+
+scala> newMap.filter(t => t._1 < "5").foreach(println)
+(12,12)
+(19,19)
+(4,4)
+(13,13)
+(16,16)
+(10,10)
+(1,1)
+(20,20)
+(2,2)
+(18,18)
+(3,3)
+(15,15)
+(11,11)
+(17,17)
+(14,14)
+
+Mutable Maps :-
+------------------
+
+scala> import scala.collection.mutable //We need to import mutable collection to create a mutable Map
+import scala.collection.mutable
+
+scala> val states = mutable.Map[String,String]() //Creating a empty mutable map
+states: scala.collection.mutable.Map[String,String] = HashMap()
+
+scala> states("AK") = "Alaska" //Adding a element by assigning a key to a value
+
+scala> states += ("AL" -> "Alabama") //We can use += method as well to add an element
+res1: states.type = HashMap(AK -> Alaska, AL -> Alabama)
+
+scala> states += ("AR" -> "Arkansas", "AZ" -> "Arizona") //We can use += to add multiple elements as well but this is deprecated
+              ^
+       warning: method += in trait Growable is deprecated (since 2.13.0): Use `++=` (addAll) instead of varargs `+=`
+res2: states.type = HashMap(AR -> Arkansas, AZ -> Arizona, AK -> Alaska, AL -> Alabama)
+
+scala> states ++= List("CA" -> "California", "CO" -> "Colorado") //Instead we can use ++= to add multiple elements
+res3: states.type = HashMap(AR -> Arkansas, AZ -> Arizona, AK -> Alaska, AL -> Alabama, CO -> Colorado, CA -> California)
+
+scala> states - "AR" //the - method creates a new Map and it doesn't change the original Map also it is not recommended to use - method on mutable map instead we can use -= method
+              ^
+       warning: method - in trait MapOps is deprecated (since 2.13.0): Use - or remove on an immutable Map
+res4: scala.collection.mutable.Map[String,String] = HashMap(AZ -> Arizona, AK -> Alaska, AL -> Alabama, CO -> Colorado, CA -> California)
+
+scala> states //original map is not changed after applying - method
+res5: scala.collection.mutable.Map[String,String] = HashMap(AR -> Arkansas, AZ -> Arizona, AK -> Alaska, AL -> Alabama, CO -> Colorado, CA -> California)
+
+scala> states -= "AR" //To remove the element in place in mutable Map we need to use -= method
+res6: states.type = HashMap(AZ -> Arizona, AK -> Alaska, AL -> Alabama, CO -> Colorado, CA -> California)
+
+scala> states //Original map is now changed
+res7: scala.collection.mutable.Map[String,String] = HashMap(AZ -> Arizona, AK -> Alaska, AL -> Alabama, CO -> Colorado, CA -> California)
+
+scala> states -= ("AL","AZ") //We can use -= method to remove multiple elements as well
+res8: states.type = HashMap(AK -> Alaska, CO -> Colorado, CA -> California)
+
+scala> states --= List("AL","CO") //We can use --= to remove the elements that are specified in a collection
+res9: states.type = HashMap(AK -> Alaska, CA -> California)
+
+scala> states("AK") = "Alaska, Really a big state" //We can update elements by assigning the existing key to a different value
+
+scala> states //The latest value got updated in the collection
+res11: scala.collection.mutable.Map[String,String] = HashMap(AK -> Alaska, Really a big state, CA -> California)
+
+Some more methods in mutable Map collection :-
+
+scala> import scala.collection.mutable
+import scala.collection.mutable
+
+scala> val newStates = mutable.Map("AK" -> "Alaska","IL" -> "Illinois","KY" -> "Kentucky")
+newStates: scala.collection.mutable.Map[String,String] = HashMap(AK -> Alaska, IL -> Illinois, KY -> Kentucky)
+
+scala> newStates.put("CO","Colorado") //We can use put method to add an element to the map or to replace an existing collection
+res1: Option[String] = None
+
+scala> newStates.put("CO","COLORADO") //If the key we are trying to add to the collection already exists then put method will return the previous value of the key
+res2: Option[String] = Some(Colorado)
+
+scala> newStates.retain((k,v) => k.contains("K")) //retain method can be used to keep elements in the map that much the predicate we supply
+                 ^
+       warning: method retain in trait MapOps is deprecated (since 2.13.0): Use filterInPlace instead
+res3: newStates.type = HashMap(AK -> Alaska, KY -> Kentucky)
+
+scala> newStates.remove("AK") //remove method to remove an element by its key value
+res4: Option[String] = Some(Alaska)
+
+scala> newStates.remove("AK") //If the key we specified doesn't exist we get None value returned
+res5: Option[String] = None
+
+scala> newStates.clear //clear method is used to delete all the elements in the map
+
+scala> newStates //finally the map is empty
+res7: scala.collection.mutable.Map[String,String] = HashMap()
+
+Sets :-
+-------
+
+Immutable Sets :-
+--------------------
+
+With sets order doesn't matter and sets doesn't allow duplicates.
+Simply way to create Set is Set(1,2,3).
+When we create Set like this the default Set we get is an Immutable Set.
+We can add elements to Set using + and we can remove elements from Set using -.
+The indexing in Sets will let us know once the element is present or not in the Set but in other collections it will return the value at the specified index.
+When we index into the sets we are actually calling the apply method of the set object.
+All the normal collection functions like map, filter, foreach will work on sets.
+We can use sets when we want to know whether the element is available in the collection or not.
+So if we are using contains method a lot then we should use sets.
+
+scala> val s1 = Set(20,10,30,40) //Creating a new Immutable Set
+s1: scala.collection.immutable.Set[Int] = Set(20, 10, 30, 40)
+
+scala> s1 + 50 //Adding a new element to the Set
+res0: scala.collection.immutable.Set[Int] = HashSet(10, 20, 50, 40, 30)
+
+scala> s1 - 20 //Removing an element from the list
+res1: scala.collection.immutable.Set[Int] = Set(10, 30, 40)
+
+scala> s1(10) //The indexing in Sets will let us know whether the element is present or not in the Set
+res2: Boolean = true
+
+scala> s1(90)
+res3: Boolean = false
+
+scala> s1.foreach(println) //foreach method on Set
+20
+10
+30
+40
+
+scala> s1.filter(_ >= 20).map(_ * 2).foreach(println) //map and filter method on Sets
+40
+60
+80
+
+Mutable Sets :-
+-----------------
+
+scala> val mutableSet = mutable.Set(4,3,1,2,3)
+mutableSet: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 4)
+
+scala> mutableSet + -10 //The + method doesn't change original Set this is because + method is available for immutable Set collection as well
+                  ^
+       warning: method + in trait SetOps is deprecated (since 2.13.0): Consider requiring an immutable Set or fall back to Set.union
+res7: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 4, -10)
+
+scala> mutableSet
+res10: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 4)
+
+scala> mutableSet += 30 //If we use += method the original collection will get updated
+res11: mutableSet.type = HashSet(1, 2, 3, 4, 30)
+
+scala> mutableSet -= 30 //The -= method will remove the element from the original collection
+res12: mutableSet.type = HashSet(1, 2, 3, 4)
+
+scala> mutableSet += 5 += 25 += 30 -= 90 -= 95 //We can chain += and -= like this
+res14: mutableSet.type = HashSet(1, 2, 3, 4, 5, 25, 30)
+
+scala> mutableSet ++= List(11,12,13,14,15) //We can ++= where we can pass all the elements present in different collection
+res15: mutableSet.type = HashSet(1, 2, 3, 4, 5, 11, 12, 13, 14, 15, 25, 30)
+
+scala> mutableSet.add(111) //We can use add method to add an element to the collection but this doesn't return the Set back it returns a boolean
+res16: Boolean = true
+
+scala> mutableSet.add(11) //If the element already exists it returns false
+res17: Boolean = false
+
+scala> mutableSet.remove(111) //Same like add we can use remove method to delete the elements from the collection
+res19: Boolean = true
+
+scala> mutableSet.remove(99)
+res20: Boolean = false
+
+scala> mutableSet
+res21: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 4, 5, 11, 12, 13, 14, 15, 25, 30)
+
+scala> mutableSet.clear() //clear method will delete all the elements from the collection
+
+Some more method on mutable sets :-
+
+scala> val rangeSet = mutable.Set[Int]()
+rangeSet: scala.collection.mutable.Set[Int] = HashSet()
+
+scala> rangeSet ++= 1 to 20
+res23: rangeSet.type = HashSet(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+
+scala> rangeSet.filter(_ % 2 == 0).map( _ * 2).foreach(println) //filter method doesn't alter the original Set
+16
+32
+4
+20
+36
+8
+24
+40
+12
+28
+
+scala> rangeSet(30) = true //We can add elements to Set like this using indexing
+
+scala> rangeSet
+res28: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30)
+
+scala> rangeSet(4) = false //We can delete elements from Set like this using indexing
+
+scala> rangeSet
+res31: scala.collection.mutable.Set[Int] = HashSet(1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30)
